@@ -11,27 +11,38 @@ namespace MiniTienda
         static void Main(string[] args)
         {
             Carrito Carrito = new Carrito();
-            
-            string Nombre = "";
-            int Cantidad = 0;
-            decimal Precio = 0;
-            Console.WriteLine("Ingrese Nombre Del Producto");
-            Nombre = Console.ReadLine();
-            Console.WriteLine("Ingrese Cantidad");
-            Cantidad = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Ingrese Precio");
-            Precio = Convert.ToDecimal(Console.ReadLine());
+            string continuar = "si";
 
-            Producto Prod = new Producto();
-            Prod.Nombre = Nombre;
-            Prod.Cantidad = Cantidad;
-            Prod.Precio = Precio;
-            Carrito.AgregarProducto(Prod);
+            while (continuar.ToLower() == "si")
+            {
+                string Nombre = "";
+                int Cantidad = 0;
+                decimal Precio = 0;
+
+                Console.WriteLine("Ingrese Nombre Del Producto");
+                Nombre = Console.ReadLine();
+                Console.WriteLine("Ingrese Cantidad");
+                Cantidad = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Ingrese Precio");
+                Precio = Convert.ToDecimal(Console.ReadLine());
+
+                Producto Prod = new Producto
+                {
+                    Nombre = Nombre,
+                    Cantidad = Cantidad,
+                    Precio = Precio
+                };
+                Carrito.AgregarProducto(Prod);
+
+                Console.WriteLine("¿Desea agregar otro producto? (si/no)");
+                continuar = Console.ReadLine();
+            }
+
+            Carrito.MostrarCarrito();
 
             Caja caja = new Caja();
             caja.Cobrar(Carrito);
 
-            Carrito.MostrarCarrito();
             Console.ReadLine();
         }
     }
